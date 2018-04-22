@@ -113,9 +113,10 @@ string Pelicula::formatoFichero() {
 bool Pelicula::tieneDatos() {
 	bool resul = false;
 	//completar
-	if (getDirector() != "" || getTitulo() != "")
+	if (titulo != "" && director != "")
 		resul = true;
 	return resul;
+
 }
 
 string Pelicula::getListaInterpretes() {
@@ -171,20 +172,20 @@ bool Pelicula::insertarInterprete(string actor) {
 bool Pelicula::eliminarInterprete(string actor) {
 	bool resul = false;
 	//completar
-	pInter aux, auxdetras;
-	auxdetras = interpretes;
+	pInter aux, auxd;
+	auxd = interpretes;
 	aux = interpretes;
 	while (aux != NULL && !resul) {
 		if (aux->interprete == actor) {
 			if (aux == interpretes)
 				interpretes = aux->sig;
 			else
-				auxdetras->sig = aux->sig;
+				auxd->sig = aux->sig;
 			delete (aux);
 			resul = true;
 			numInters--;
 		} else {
-			auxdetras = aux;
+			auxd = aux;
 			aux = aux->sig;
 		}
 	}

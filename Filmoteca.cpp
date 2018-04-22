@@ -7,8 +7,7 @@
 #include <fstream>
 
 Filmoteca::Filmoteca(string prop) {
-	Pelicula aux;
-	aux = Pelicula();
+	Pelicula aux = Pelicula();
 	cent = new NodoF(aux, NULL);
 	cab = new NodoF(aux, cent);
 	propietario = prop;
@@ -19,10 +18,11 @@ Filmoteca::~Filmoteca() {
 
 bool Filmoteca::estaVacia() {
 	bool resul = false;
-	NodoF *ant, *act;
-	ant = cab;
-	act = ant->sig;
-	if (act == cent)
+	//completar
+	pNodo anterior, actual;
+	anterior = cab;
+	actual = anterior->sig;
+	if (actual == cent)
 		resul = true;
 	return resul;
 }
@@ -34,104 +34,101 @@ string Filmoteca::getPropietario() {
 void Filmoteca::setPropietario(string p) {
 	propietario = p;
 }
-//
 bool Filmoteca::insertarPelicula(Pelicula peli) {
 	bool resul = false;
-	NodoF *ant, *act;
-	ant = cab;
-	act = ant->sig;
+	//completar
+	pNodo anterior, actual;
+	anterior = cab;
+	actual = anterior->sig;
 	cent->info = peli;
-	while (act->info.getTitulo().compare(peli.getTitulo()) < 0) {
-		ant = ant->sig;
-		act = ant->sig;
+	while (actual->info.getTitulo().compare(peli.getTitulo()) < 0) {
+		anterior = anterior->sig;
+		actual = anterior->sig;
 	}
-	if (((act->info.getTitulo().compare(peli.getTitulo()) < 0) == 0)
-			&& (act == cent)) {
-		NodoF *nueva;
-		nueva = new NodoF(peli, act);
-		ant->sig = nueva;
+	if (((actual->info.getTitulo().compare(peli.getTitulo()) < 0) == 0)
+			&& (actual == cent)) {
+		pNodo nueva;
+		nueva = new NodoF(peli, actual);
+		anterior->sig = nueva;
 		resul = true;
-	} else if (act->info.getTitulo().compare(peli.getTitulo()) > 0) {
-		NodoF *nueva;
-		nueva = new NodoF(peli, act);
-		ant->sig = nueva;
+	} else if (actual->info.getTitulo().compare(peli.getTitulo()) > 0) {
+		pNodo nueva;
+		nueva = new NodoF(peli, actual);
+		anterior->sig = nueva;
 		resul = true;
 	}
 	return resul;
 }
-//
 bool Filmoteca::eliminarPelicula(string titulo) {
 	bool resul = false;
-	NodoF *ant, *act;
-	ant = cab;
-	act = ant->sig;
+	//completar
+	pNodo anterior, actual;
+	anterior = cab;
+	actual = anterior->sig;
 	cent->info.setTitulo(titulo);
-	while (act->info.getTitulo().compare(titulo) != 0) {
-		ant = ant->sig;
-		act = act->sig;
+	while (actual->info.getTitulo().compare(titulo) != 0) {
+		anterior = anterior->sig;
+		actual = actual->sig;
 	}
-	if (act != cent) {
-		ant->sig = act->sig;
-		delete (act);
+	if (actual != cent) {
+		anterior->sig = actual->sig;
+		delete (actual);
 		resul = true;
 	}
 	return resul;
 }
-//
 Pelicula Filmoteca::buscarPelicula(string t) {
 	Pelicula resul;
-	NodoF *ant, *act;
-	ant = cab;
-	act = ant->sig;
+	pNodo anterior, actual;
+	anterior = cab;
+	actual = anterior->sig;
 	cent->info.setTitulo(t);
-	while (act->info.getTitulo().compare(t) != 0) {
-		ant = ant->sig;
-		act = ant->sig;
+	while (actual->info.getTitulo().compare(t) != 0) {
+		anterior = anterior->sig;
+		actual = anterior->sig;
 	}
-	if (act == cent)
+	if (actual == cent)
 		resul = Pelicula();
 	else
-		resul = act->info;
+		resul = actual->info;
 	return resul;
 }
-//
 void Filmoteca::mostrarFilmoteca() {
-	NodoF *ant, *act;
-	int conta = 1;
-	ant = cab;
-	act = ant->sig;
-	while (act != cent) {
+	pNodo anterior, actual;
+	int contador = 1;
+	anterior = cab;
+	actual = anterior->sig;
+	while (actual != cent) {
 		cout << endl;
-		cout << "PELICULA " << conta << ":\n" << act->info.aCadena();
-		conta++;
-		ant = ant->sig;
-		act = ant->sig;
+		cout << "PELICULA " << contador << ":\n" << actual->info.aCadena();
+		contador++;
+		anterior = anterior->sig;
+		actual = anterior->sig;
 	}
 }
-//
 bool Filmoteca::guardarEnFichero(string f) {
 	bool resul = false;
+	//completar
 	string nomFich = propietario + f + ".txt";
 	ofstream fichero(nomFich.c_str());
-	NodoF *ant, *act;
-	ant = cab;
-	act = ant->sig;
-	while (act != cent) {
-		fichero << act->info.formatoFichero()<<endl;
-		ant = ant->sig;
-		act = ant->sig;
+	pNodo anterior, actual;
+	anterior = cab;
+	actual = anterior->sig;
+	while (actual != cent) {
+		fichero << actual->info.formatoFichero()<<endl;
+		anterior = anterior->sig;
+		actual = anterior->sig;
 	}
 	fichero.close();
 	return resul;
 }
-//
 void Filmoteca::recuperarDeFichero(string f) {
 	ifstream fichero(f.c_str());
-	string peli;
-	Pelicula nueva;
-	while (getline(fichero, peli)) {
-		nueva = Pelicula(peli);
-		insertarPelicula(nueva);
+	string pelicula;
+	Pelicula otra;
+	while (getline(fichero, pelicula)) {
+		otra = Pelicula(pelicula);
+		insertarPelicula(otra);
 	}
 	fichero.close();
 }
