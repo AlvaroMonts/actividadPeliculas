@@ -1,0 +1,7 @@
+;Almodovar;drama;1980;
+Amor;Haneke;comedia;2001;Trintignant;Emmanuelle Riva;Isabelle Huppert;William Shimell;Laurent Capelluto;Dinara Drukarova;
+Cenicienta;Almodovar;animacion;2015;
+Dormir es un deporte;Indurain;documentales;1999;
+Pinocho;Bunuel;drama;1980;Doctor Zoidberg;Billy West;Turanga Leela;Amy Wong;John DiMaggio;Franky DiMaggio;Paul Newman;Robert Redforf;Dani Rovira;C3PO;Amaya Salamanca;
+Rambo;Schwazzenegger;com. romantica;2001;
+Yoga;Emir;drama;2010;
